@@ -1,0 +1,127 @@
+{% extends 'vrtic/base.html' %}
+
+{% block content %}
+
+        <div class="container-fluid">
+            <div class="sidebar-detached sidebar-left">
+                <div class="sidebar">
+                    <div class="sidebar-shop" id="ecommerce-sidebar-toggler">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <!-- Categories Starts -->
+                                <div id="product-categories">
+                                    <div class="product-category-title">
+                                        <center><h3 class="filter-title mb-1">Vrtici / Grupe</h3></center>
+                                    </div>
+                                    <ul class="list-unstyled categories-list">
+                                        {% for group in groups %}
+                                        <li>
+                                            <span class="vs-radio-con vs-radio-primary py-25">
+                                                <form action="{% url 'vrtic:group' group.id %}">
+                                                <button type="submit" class="">{{ group.name }} </button>
+                                                    </form>
+                                            </span>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div class="row" id="basic-table">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        <center><h2 class="text-bold-700 mb-0">{{ kids_num }}</h2></center>
+                                        <p>Ukupno djece u grupi</p>
+                                    </div>
+                                    <div class="p-50 m-0">
+                                        <div class="avatar-content">
+                                            <i class="fa fa-school text-info font-large-1"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="col-lg-4 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        <center><h2 class="text-bold-700 mb-0">{{ female }}</h2></center>
+                                        <p>Djevojcice</p>
+                                    </div>
+                                    <div class="p-50 m-0">
+                                        <div class="avatar-content">
+                                            <i class="fa fa-female text-info font-large-1"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="col-lg-4 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        <center><h2 class="text-bold-700 mb-0">{{ male }}</h2></center>
+                                        <p>Djecaci</p>
+                                    </div>
+                                    <div class=" p-50 m-0">
+                                        <div class="avatar-content">
+                                            <i class="fa fa-male text-info font-large-1"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <div class="col-12">
+                        <div class="card"><br>
+                            <div class="card">
+                                <h3 class="card-title"><center>{{ group.name }}</center></h3>
+                            </div>
+                        {% for teacher in  group.teachers_set.all %}
+                        <div class="card">
+                                <h3 class="card-title"><center> {{ teacher }} - {{ teacher.description }}</center></h3>
+                            </div>
+                        {% endfor %}
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th><center>IME I PREZIME</center></th>
+                                                    <th><center>PROGRAM</center></th>
+                                                    <th><center>IME OCA</center></th>
+                                                    <th><center>IME MAJKE</center></th>
+                                                    <th><center>PREGLED PROFILA</center></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for kid in kids %}
+                                                <tr>
+                                                    <td><center>{{ kid.name }}</center></td>
+                                                    <td><center>{{ kid.program_choice }}</center></td>
+                                                    <td><center>{{ kid.father_name }}</center></td>
+                                                    <td><center>{{ kid.mother_name }}</center></td>
+                                                    <td><center><a href="{% url 'vrtic:update_kid' kid.id %}" type="submit" class="btn btn-outline-info round mr-1 mb-1">Pregled</a>
+                                                </center></tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}

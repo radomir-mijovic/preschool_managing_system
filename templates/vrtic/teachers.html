@@ -1,0 +1,103 @@
+{% extends 'vrtic/base.html' %}
+
+{% block title %}
+    Vaspitaci
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+                <section class="users-edit">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <ul class="nav nav-tabs mb-3" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center" href="{% url 'vrtic:teachers_centralni' %}">
+                                            <h5><span class="d-none d-sm-block">Centralni Vrtic</span></h5>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center" href="{% url 'vrtic:teachers_novi' %}">
+                                            <h5><span class="d-none d-sm-block">Novi Vrtic</span></h5>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center" href="{% url 'vrtic:teachers_tq' %}">
+                                            <h5><span class="d-none d-sm-block">TQ Vrtic</span></h5>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center" href="{% url 'vrtic:teachers_stefan' %}">
+                                            <h5><span class="d-none d-sm-block">Sv. Stefan Vrtic</span></h5>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center" href="{% url 'vrtic:teachers_petrovac' %}">
+                                            <h5><span class="d-none d-sm-block">Petrovac Vrtic</span></h5>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+                                       <div class="row" id="table-contexual">
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h4 class="card-title">Pregled vaspitaca po vrticima</h4>
+                                                </div>
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                    </div>
+                                                    <div class="table-responsive">
+                                                        <table class="table mb-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th colspan="7"><h3><center>{{ name }}</center></h3></th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th><center>Ime i Prezime</center></th>
+                                                                    <th><center>Grupa</center></th>
+                                                                    <th><center>Adresa</center></th>
+                                                                    <th><center>Datum rodjenja</center></th>
+                                                                    <th><center>Broj telefona</center></th>
+                                                                    <th><center>Opis posla</center></th>
+                                                                    <th><center>Izmjena podataka</center></th>
+                                                                    <th><center>Brisanje</center></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            {% for teacher in teachers %}
+                                                                <tr class="table-info">
+                                                                    <td><center>{{ teacher.name.title }}</center></td>
+                                                                    <td><center>{{ teacher.group.name }}</center></td>
+                                                                    <td><center>{{ teacher.address.capitalize }}</center></td>
+                                                                    <td><center>{{ teacher.date_of_birth }}</center></td>
+                                                                    <td><center>{{ teacher.phone }}</center></td>
+                                                                    <td><center>{{ teacher.description }}</center></td>
+                                                                    <th scope="row"><center><a class="btn btn-outline-info round" href="{% url 'vrtic:teacher_update' teacher.id  %}">Profil</a></center></th>
+                                                                    <th scope="row"><center>
+                                                                        <a href="{% url 'vrtic:teacher_delete' teacher.id %}" class="btn btn-outline-danger round" data-toggle="modal" data-target="#deleteTeacher">Obrisi</a>
+                                                                        <div class="modal fade text-left" id="deleteTeacher" tabindex="-1">
+                                                                            <div class="modal-dialog">
+                                                                                <div class="modal-content">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </center></th>
+                                                                </tr>
+                                                            {% endfor %}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </section>
+    </div>
+{% endblock %}

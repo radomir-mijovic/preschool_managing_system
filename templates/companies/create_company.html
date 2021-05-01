@@ -1,0 +1,77 @@
+{% extends 'companies/base.html' %}
+
+{% block title %}
+    Nova Kompanija
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper"><br><br>
+<aside class="main-sidebar sidebar-dark-blue elevation-4">
+    <div class="sidebar">
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+          <li class="nav-item menu-open">
+          <li class="nav-header"><center><h5>FIRME</h5></center></li>
+            {% for company in comp %}
+          <li class="nav-item">
+            <a href="{% url 'companies:company_payment' company.id %}" class="nav-link">
+              <i class="nav-icon fas fa-columns"></i>
+              <p>
+                {{ company.name.title }}
+              </p>
+            </a>
+          </li>
+            {% endfor %}
+         </ul>
+      </nav>
+    </div>
+  </aside>
+    <section class="content">
+      <div class="container">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-10">
+            <!-- general form elements -->
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Dodati novu kompaniju</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form method="POST">{% csrf_token %}
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Naziv Firme</label>
+                    <input name="name" type="text" class="form-control" id="exampleInputEmail1" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Adresa</label>
+                    <input name="address" type="text" class="form-control" id="exampleInputPassword1">
+                  </div>
+                    <div class="form-group">
+                    <label for="exampleInputPassword1">PIB Firme</label>
+                    <input name="company_id" type="text" class="form-control" id="exampleInputPassword1">
+                  </div>
+                    <div class="form-group">
+                    <label for="exampleInputPassword1">Broj ziro racuna</label>
+                    <input name="bank_number" type="text" class="form-control" id="exampleInputPassword1">
+                  </div>
+                    <div class="form-group">
+                    <label for="exampleInputPassword1">Email</label>
+                    <input name="email" type="email" class="form-control" id="exampleInputPassword1">
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-outline-info">Dodaj
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            </div>
+          </div>
+      </div>
+    </section>
+</div>
+{% endblock %}

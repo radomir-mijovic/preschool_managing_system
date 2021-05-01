@@ -1,0 +1,90 @@
+{% load static %}
+{% block navbar %}
+                                            <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu bg-info navbar-dark navbar-shadow mb-2" >
+                                                <div class="navbar-wrapper">
+                                                    <div class="navbar-container content">
+                                                        <div class="navbar-collapse" id="navbar-mobile-4">
+                                                            <ul class="nav navbar-nav bookmark-icons mr-auto float-left">
+                                                                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="{% url 'vrtic:kids' %}" data-toggle="tooltip" data-placement="top">
+                                                                    Spisak djece</a></li>
+                                                                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="{% url 'vrtic:create_kid' %}" data-toggle="tooltip" data-placement="top">
+                                                                    Upis djece</a></li>
+                                                                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="{% url 'vrtic:all_payments' %}" data-toggle="tooltip" data-placement="top">
+                                                                    Uplate</a></li>
+                                                                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="{% url 'vrtic:teachers_centralni' %}" data-toggle="tooltip" data-placement="top">
+                                                                    Vaspitaci</a></li>
+                                                                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="{% url 'vrtic:teacher_create' %}" data-toggle="tooltip" data-placement="top">
+                                                                    Upis Vaspitaca</a></li>
+                                                                <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><span class="badge badge-pill badge-primary badge-up"></span>Vrtici</a>
+                                                                    <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
+                                                                        <li class="scrollable-container media-list ps">
+                                                                            <a class="d-flex justify-content-between" href="{% url 'vrtic:groups_centralni' %}">
+                                                                                <div class="media d-flex align-items-start">
+                                                                                    <div class="media-left"></div>
+                                                                                    <div class="media-body">
+                                                                                        <h6 class="primary media-heading">Centralni Vrtić</h6>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </a>
+                                                                            <a class="d-flex justify-content-between" href="{% url 'vrtic:groups_novi' %}">
+                                                                                <div class="media d-flex align-items-start">
+                                                                                    <div class="media-left">
+                                                                                    </div>
+                                                                                    <div class="media-body">
+                                                                                        <h6 class="success media-heading red darken-1">Novi Vrtić</h6>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </a>
+                                                                            <a class="d-flex justify-content-between" href="{% url 'vrtic:groups_tq' %}">
+                                                                                <div class="media d-flex align-items-start">
+                                                                                    <div class="media-left">
+                                                                                    </div>
+                                                                                    <div class="media-body">
+                                                                                        <h6 class="secondary media-heading red darken-1">TQ Vrtić</h6>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </a>
+                                                                            <a class="d-flex justify-content-between" href="{% url 'vrtic:groups_stefan' %}">
+                                                                                <div class="media d-flex align-items-start">
+                                                                                    <div class="media-left"></div>
+                                                                                    <div class="media-body">
+                                                                                        <h6 class="danger media-heading yellow darken-3">Sv Stefan Vrtić</h6>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </a>
+                                                                            <a class="d-flex justify-content-between" href="{% url 'vrtic:groups_petrovac' %}">
+                                                                                <div class="media d-flex align-items-start">
+                                                                                    <div class="media-left"></div>
+                                                                                    <div class="media-body">
+                                                                                        <h6 class="info media-heading">Petrovac Vrtić</h6>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </a>
+                                                                            <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+                                                                                <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+                                                                            </div>
+                                                                            <div class="ps__rail-y" style="top: 0px; right: 0px;">
+                                                                                <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </li>
+                                                            </ul>
+                                                            <ul class="nav navbar-nav float-none">
+                                                                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="{% url 'companies:index' %}" data-toggle="tooltip" data-placement="top">
+                                                                    Kompanije</a></li>
+                                                                <li class="nav-item nav-search"><a href="{% url 'vrtic:logout' %}" class="nav-link">Logout</a>
+                                                                </li>
+                                                                <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                                                                        <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">Dragana Pima
+                                                                        </span><span class="user-status">Administrator</span></div>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </nav>
+
+
+{% endblock %}

@@ -1,0 +1,144 @@
+{% extends 'vrtic/base.html' %}
+
+{% block title %}
+    Vrtici Budva
+{% endblock %}
+
+{% block content %}
+
+<div class="container"><br><br>
+                    <div class="row">
+                    {% if total_kids %}
+                        <div class="col-4">
+                            <div class="card text-center">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class=" bg-rgba-white p-50 m-0 mb-1">
+                                            <div class="avatar-content">
+                                                <i class="fa fa-school text-info font-large-1"></i>
+                                            </div>
+                                        </div>
+                                        <h2 class="text-bold-700">{{ total_kids }}</h2>
+                                        <p class="mb-0 line-ellipsis">Ukupno djece</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="card text-center">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class=" bg-rgba-white p-50 m-0 mb-1">
+                                            <div class="avatar-content">
+                                                <i class="fa fa-female text-info font-large-1"></i>
+                                            </div>
+                                        </div>
+                                        <h2 class="text-bold-700">{{ female }}</h2>
+                                        <p class="mb-0 line-ellipsis">Zenska djeca</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="card text-center">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="bg-rgba-white p-50 m-0 mb-1">
+                                            <div class="avatar-content">
+                                                <i class="fa fa-male text-info font-large-1"></i>
+                                            </div>
+                                        </div>
+                                        <h2 class="text-bold-700">{{ male }}</h2>
+                                        <p class="mb-0 line-ellipsis">Muska djeca</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div class="container">
+                                        <center><h2 class="text-bold-700 mb-0">{{ primary_program }}</h2></center>
+                                        <center><p>Sa primarnim programom</p></center>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div class="container">
+                                        <center><h2 class="text-bold-700 mb-0">{{ short_program }}</h2></center>
+                                        <center><p>Sa kracim programom</p></center>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                        <table class="table table-dark caption-top">
+                            <center><h2>Lista djece</h2></center>
+                                         {% if messages %}
+                                            {% for message in messages %}
+                                                <div class="alert alert-danger" role="alert">
+                                                      <center><h6>{{ message }}</h6></center>
+                                                </div>
+                                            {% endfor %}
+                                        {% endif %}
+                                <section id="search-bar">
+                                            <div class="search-bar">
+                                                <form action="{% url 'vrtic:search' %}" method="GET">
+                                                    <fieldset class="form-group position-relative has-icon-left">
+                                                        <input name="search" type="text" class="form-control round" id="searchbar" placeholder="Pretraga">
+                                                        <div class="form-control-position">
+                                                        </div>
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                </section>
+                        </table>
+                    </div>
+
+
+                <section id="basic-datatable">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-body card-dashboard">
+                                        <div class="table-responsive">
+                                            <table class="table zero-configuration">
+                                                <thead>
+                                                    <tr>
+                                                        <th><center>Prezime i Ime</center></th>
+                                                        <th><center>Grupa</center></th>
+                                                        <th><center>Program</center></th>
+                                                        <th><center>Otac</center></th>
+                                                        <th><center>Majka</center></th>
+                                                        <th><center>Telefon</center></th>
+                                                        <th><center>Pregled profila</center></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for kid in kids %}
+                                                    <tr>
+                                                        <td><center>{{ kid.name.title }}</center></td>
+                                                        <td><center>{{ kid.group.name }}</center></td>
+                                                        <td><center>{{ kid.program_choice }}</center></td>
+                                                        <td><center>{{ kid.father_name.title }}</center></td>
+                                                        <td><center>{{ kid.mother_name.title }}</center></td>
+                                                        <td><center>{{ kid.contact_phone }}</center></td>
+                                                        <th scope="row"><a class="btn btn-outline-info round" href="{% url 'vrtic:update_kid' kid.id %}">Prikazi</a></center></th>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+</div>
+{% endblock %}

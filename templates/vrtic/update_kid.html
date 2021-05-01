@@ -1,0 +1,228 @@
+{% extends 'vrtic/base.html' %}
+
+{% block title %}
+    Profil
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <ul class="nav nav-tabs mb-3" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#" aria-controls="account" role="tab" aria-selected="true">
+                                            <span class="d-none d-sm-block">Profil</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center" href="{% url 'vrtic:create_payment' kids.id %}">
+                                            <span class="d-none d-sm-block">Uplate</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <form novalidate method="POST">{% csrf_token %}
+                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+                                        <!-- users edit media object start -->
+
+                                        <div class="media mb-2">
+                                            <div class="media-body mt-50">
+                                                <h1 class="media-heading">{{ form.name }}</h1>
+                                                <div class="col-12 d-flex mt-1 px-0">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- users edit media object ends -->
+                                        <!-- users edit account form start -->
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <center><label><strong> Mjesto i datum rodjenja</strong></label></center><br>
+                                                            <input name="city_birthday" class="form-control round text-center" value="{{ object.city_birthday }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <center><label><strong>Adresa stanovanja</strong></label></center><br>
+                                                            <input name="address" class="form-control round text-center" value="{{ object.address.capitalize }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <center><label><strong>JMBG</strong></label></center>
+                                                           <input name="custom_id" class="form-control round text-center" value="{{ object.custom_id }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <center><label><strong>Telefon</strong></label></center>
+                                                           <input  name="contact_phone" class="form-control round text-center" value="{{ object.contact_phone }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <center><label><strong>Broj clanova porodice</strong></label></center>
+                                                            <input name="family_size" type="number" class="form-control round text-center" value="{{ object.family_size }}">
+                                                        </div>
+                                                    </div>
+                                                </div><br><br>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <center><label><strong>Pol djeteta</strong></label></center>
+                                                            <fieldset class="form-group">
+                                                                <select style="text-align-last:center;"  name="gender" class="form-control round">
+                                                                    <option value="{{ object.gender }}">{{ object.gender.capitalize }}</option>
+                                                                    <option disabled>----------------</option>
+                                                                    <option value="muski">Muski</option>
+                                                                    <option value="zenski">Zenski</option>
+                                                                </select>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <center><label><strong>Dijete zivi sa</strong></label></center>
+                                                        <fieldset class="form-group">
+                                                                <select style="text-align-last:center;" name="living_with" class="form-control round">
+                                                                    <option value="{{ object.living_with }}">{{ object.living_with.capitalize }}</option>
+                                                                    <option disabled>----------------</option>
+                                                                    <option value="oba roditelja">Oba roditelja</option>
+                                                                    <option value="jednim roditeljem">Jednim roditeljem</option>
+                                                                    <option value="bez roditelja">Bez roditelja</option>
+                                                                </select>
+                                                            </fieldset>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <center><label><strong>Broj djece predskolskog uzrasta u porodici</strong></label></center>
+                                                            <input name="number_of_preschool_kids_in_family" type="number" class="form-control round text-center" value="{{ object.number_of_preschool_kids_in_family }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <center><label><strong>Dijete je vec pohadjalo vaspitnu ustanovu</strong></label></center>
+                                                            <fieldset class="form-group">
+                                                                <select style="text-align-last:center;" name="kid_already_been_in_kindergarten" class="form-control round">
+                                                                    <option value="{{ object.kid_already_been_in_kindergarten }}">{{ object.kid_already_been_in_kindergarten.capitalize }}</option>
+                                                                    <option disabled>----------------</option>
+                                                                    <option value="da">Da</option>
+                                                                    <option value="ne">Ne</option>
+                                                                </select>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <center><label><strong>Grupa u vrticu</strong></label></center>
+                                                            <fieldset class="form-group">
+                                                                <select style="text-align-last:center;" name="group" class="form-control round">
+                                                                     <option value="{{ object.group.id }}">{{ object.group }}</option>
+                                                                     <option disabled value="">-------------</option>
+                                                                    {% for group in groups %}
+                                                                    <option value="{{ group.id }}"> {{ group.name }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <center><label><strong>Program</strong></label></center>
+                                                            <fieldset class="form-group">
+                                                                <select style="text-align-last:center;" name="program_choice" class="form-control round">
+                                                                    <option value="{{ object.program_choice }}">{{ object.program_choice.capitalize }}</option>
+                                                                    <option disabled>----------------</option>
+                                                                    <option value="primarni program">Primarni program</option>
+                                                                    <option value="kraci program">Kraci program</option>
+                                                                </select>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="table-responsive border rounded px-1 ">
+                                                        <h6 class="border-bottom py-1 mx-1 mb-0 font-medium-2">Podaci o roditeljima</h6>
+                                                        <table class="table table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th><center>Ime i Prezime</center></th>
+                                                                    <th><center>Nivo obrazovanja - Zanimanje</center></th>
+                                                                    <th><center>Poslodavac kod kojeg je roditelj zaposlen</center></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="custom-control custom-checkbox">
+                                                                            <input name="father_name" class="form-control round text-center" value="{{ object.father_name.title }}">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="custom-control custom-checkbox">
+                                                                            <input name="father_education_level" class="form-control round text-center" value="{{ object.father_education_level.capitalize }}">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="custom-control custom-checkbox">
+                                                                            <input name="father_company" class="form-control round text-center" value="{{ object.father_company.capitalize }}">
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="custom-control custom-checkbox">
+                                                                         <input name="mother_name" class="form-control round text-center" value="{{ object.mother_name.title }}">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="custom-control custom-checkbox">
+                                                                            <input name="mother_education_level" class="form-control round text-center" value="{{ object.mother_education_level.capitalize }}">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="custom-control custom-checkbox">
+                                                                            <input name="mother_company" class="form-control round text-center" value="{{ object.mother_company.capitalize }}">
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
+                                                    <button type="submit" class="btn bg-gradient-info round mr-1 mb-1">Sacuvaj</button>
+
+                                                    <button type="button"  class="btn bg-gradient-danger round mr-1 mb-1" data-toggle="modal" data-target="#primary">Izbrisi</button>
+                                                    <div class="modal fade text-left" id="primary" tabindex="-1" role="dialog" aria-labelledby="myModalLabel160" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header bg-danger white">
+                                                                    <h5 class="modal-title" id="myModalLabel160">Potvrditi brisanje</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Da li ste sigurni da zelite da obrisete {{ object.name.title }}?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <a href="{% url 'vrtic:delete_kid' object.id %}" class="btn btn-danger">Obrisi</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+ </div>
+
+{% endblock %}

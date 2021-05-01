@@ -1,0 +1,22 @@
+
+<aside class="main-sidebar sidebar-dark-blue elevation-4">
+    <div class="sidebar">
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+          <li class="nav-item menu-open">
+          <li class="nav-header"><center><h5>FIRME</h5></center></li>
+            {% for company in companies %}
+          <li class="nav-item">
+            <a href="{% url 'companies:company_payment' company.id %}" class="nav-link">
+              <i class="nav-icon fas fa-columns"></i>
+              <p>
+                {{ company.name.title }}
+              </p>
+            </a>
+          </li>
+            {% endfor %}
+         </ul>
+      </nav>
+    </div>
+  </aside>

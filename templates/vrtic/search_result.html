@@ -1,0 +1,66 @@
+{% extends 'vrtic/base.html' %}
+
+{% block content %}
+<div class="container"><br><br>
+<table class="table table-dark caption-top">
+    <center><h2>Lista djece</h2></center>
+                 {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-danger" role="alert">
+                              <h6>{{ message }}</h6>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+        <section id="search-bar">
+                    <div class="search-bar">
+                        <form action="{% url 'vrtic:search' %}" method="GET">
+                            <fieldset class="form-group position-relative has-icon-left">
+                                <input name="search" type="text" class="form-control round" id="searchbar" placeholder="Pretraga">
+                                <div class="form-control-position">
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+        </section>
+</table>
+
+<section id="basic-datatable">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-body card-dashboard">
+                                        <div class="table-responsive">
+                                            <table class="table zero-configuration">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Prezime i Ime</th>
+                                                        <th>Vaspitac</th>
+                                                        <th>Grupa</th>
+                                                        <th>Program</th>
+                                                        <th>Telefon</th>
+                                                        <th>Pregled profila</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for kid in kids %}
+                                                    <tr>
+                                                        <td>{{ kid.name }}</td>
+                                                        <td>{{ kid.group.teachers.name }}</td>
+                                                        <td>{{ kid.group.name }}</td>
+                                                        <td>{{ kid.program_choice }}</td>
+                                                        <td>{{ kid.contact_phone }}</td>
+                                                        <th scope="row"><a class="btn btn-primary" href="{% url 'vrtic:update_kid' kid.id %}">Prikazi</a></th>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+</div>
+{% endblock %}

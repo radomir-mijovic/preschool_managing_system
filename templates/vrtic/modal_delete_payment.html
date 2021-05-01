@@ -1,0 +1,14 @@
+<div class="modal-header bg-danger white">
+    <h5 class="modal-title" id="myModalLabel160">Potvrdi brisanje</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form method="POST" action="{% url 'vrtic:delete_payment' payment.id %}"> {% csrf_token %}
+    <div class="modal-body">
+        Potvrdi brisanje {{ payment.bank_paper_id }}
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-danger">Obrisi</button>
+    </div>
+</form>

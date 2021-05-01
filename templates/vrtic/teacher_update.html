@@ -1,0 +1,76 @@
+{% extends 'vrtic/base.html' %}
+
+{% block title %}
+    Vaspitac
+{% endblock %}
+
+{% block content %}<br><br><br>
+        <div class="container">
+                <section id="input-style">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Promjena podataka</h4>
+                                </div>
+                                <form method="POST">{% csrf_token %}
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                            </div>
+                                                <div class="col-sm-6 col-12">
+                                                    <fieldset class="form-group">
+                                                        <center><label for="name"><strong>Ime i Prezime</strong></label></center>
+                                                        <input type="text" name="name" id="name" class="form-control round text-center" value="{{ object.name }}">
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-sm-6 col-12">
+                                                    <fieldset class="form-group">
+                                                        <center><label for="address"><strong>Adresa</strong></label></center>
+                                                        <input type="text" name="address" id="address" class="form-control round text-center" value="{{ object.address.capitalize }}">
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-sm-6 col-12">
+                                                    <fieldset class="form-group">
+                                                        <center><label for="date"><strong>Datum rodjenja</strong></label></center>
+                                                        <input type="text" name="date_of_birth" id="date" class="form-control round text-center" value="{{ object.date_of_birth }}">
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-sm-6 col-12">
+                                                    <fieldset class="form-group">
+                                                        <center><label for="phone"><strong>Broj telefona</strong></label></center>
+                                                        <input type="text" name="phone" class="form-control round text-center" id="phone" value="{{ object.phone }}">
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-sm-6 col-12">
+                                                    <fieldset class="form-group">
+                                                        <center><label for="description"><strong>Opis posla</strong></label></center>
+                                                        <input type="text" name="description" class="form-control round text-center" id="description" value="{{ object.description }}">
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-sm-6 col-12">
+                                                    <fieldset class="form-group">
+                                                        <center><label for="group"><strong>Vrtic / Grupa</strong></label></center>
+                                                         <select style="text-align-last:center;" name="group" class="form-control round">
+                                                         <option value="{{ object.group.id }}">{{ object.group }}</option>
+                                                         <option disabled value="">--------</option>
+                                                        {% for group in groups %}
+                                                        <option value="{{ group.id }}"> {{ group.name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                    </fieldset>
+                                                </div>
+                                            <div class="col-md-8 offset-md-4">
+                                                  <button  type="submit" class="btn btn-outline-info round">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+        </div>
+{% endblock %}

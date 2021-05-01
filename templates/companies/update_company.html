@@ -1,0 +1,138 @@
+{% extends 'companies/base.html' %}
+
+{% block title %}
+    Profil kompanije
+{% endblock %}
+
+{% block content %}
+
+<div class="content-wrapper"><br><br>
+ <aside class="main-sidebar sidebar-dark-blue elevation-4">
+    <div class="sidebar">
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+          <li class="nav-item menu-open">
+          <li class="nav-header"><center><h5>FIRME</h5></center></li>
+            {% for company in comp %}
+          <li class="nav-item">
+            <a href="{% url 'companies:company_payment' company.id %}" class="nav-link">
+              <i class="nav-icon fas fa-columns"></i>
+              <p>
+                {{ company.name.title }}
+              </p>
+            </a>
+          </li>
+            {% endfor %}
+         </ul>
+      </nav>
+    </div>
+  </aside>
+
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-10">
+            <center><h1>
+              {{ object.name.capitalize }}
+            </h1></center>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-10">
+            <div class="card card-info card-tabs">
+              <div class="card-header p-0 pt-1">
+                <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-one-home-tab"  href="{% url 'companies:company_payment' companies.id %}"  aria-controls="custom-tabs-one-home" aria-selected="false">Uplate</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="true">Profil</a>
+                  </li>
+                </ul>
+              </div>
+                <form class="form-horizontal" method="POST">{% csrf_token %}
+              <div class="card-body">
+                <div class="form-group row">
+                    <label for="basicInput" class="col-sm-2 col-form-label">Naziv Firme</label>
+                    <div class="col-sm-6">
+                      <input name="name" type="text" class="form-control" id="basicInput" value="{{ object.name.capitalize }}" required>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="Adresa" class="col-sm-2 col-form-label">Adresa</label>
+                    <div class="col-sm-6">
+                        {% if object.address %}
+                      <input name="address" type="text" class="form-control" id="Adresa" value="{{ object.address }}">
+                        {% else %}
+                        <input name="address" type="text" class="form-control" id="Adresa" placeholder="Upisati adresu">
+                        {% endif %}
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="PIB" class="col-sm-2 col-form-label">PIB</label>
+                    <div class="col-sm-6">
+                        {% if object.company_id %}
+                      <input name="company_id" type="text" class="form-control" id="PIB" value="{{ object.company_id }}">
+                        {% else %}
+                        <input name="company_id" type="text" class="form-control" id="PIB" placeholder="Upisati PIB firme">
+                        {% endif %}
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="account" class="col-sm-2 col-form-label">Broj žiro računa</label>
+                    <div class="col-sm-6">
+                        {% if object.bank_number != None %}
+                      <input name="bank_number" type="text" class="form-control" id="account" value="{{ object.bank_number }}">
+                        {% else %}
+                        <input name="bank_number" type="text" class="form-control" id="account" placeholder="Upisati ziro racun">
+                        {% endif %}
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="Email" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-6">
+                        {% if object.email %}
+                        <input name="email" type="email" class="form-control" id="Email" value="{{ object.email }}">
+                        {% else %}
+                        <input name="email" type="email" class="form-control" id="Email" placeholder="Email">
+                        {% endif %}
+                    </div>
+                  </div>
+              </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-info float-left">Izmjeni</button>
+
+                    <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#primary">Obrisi</button>
+                <div class="modal fade text-left" id="primary" tabindex="-1" role="dialog" aria-labelledby="myModalLabel160" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header bg-danger white">
+                                                                    <h5 class="modal-title" id="myModalLabel160">Potvrditi brisanje</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Da li ste sigurni da zelite da obrisete {{ object.name.title }}?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <a href="{% url 'companies:delete_company' object.id %}" class="btn btn-danger" >Obrisati</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                        </div>
+                </form>
+
+            </div>
+          </div>
+        </div>
+     </div>
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,161 @@
+{% extends 'vrtic/base.html' %}
+
+{% block title %}
+    Uplate
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+                <section class="users-edit">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <ul class="nav nav-tabs mb-3" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center " href="{% url 'vrtic:update_kid' kid.id %}" aria-controls="account" role="tab" aria-selected="true">
+                                            <span class="d-none d-sm-block">Profil</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center active" id="information-tab" href="" aria-controls="information" role="tab" aria-selected="false">
+                                            <span class="d-none d-sm-block">Uplate</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+                                        <!-- users edit media object start -->
+                                        <div class="media mb-2">
+                                            <div class="media-body mt-50">
+                                                <h1 class="media-heading">{{ kid.name.title }}</h1>
+                                            </div>
+                                        </div>
+                                        <!-- users edit media object ends -->
+                                        <!-- users edit account form start -->
+
+                                         <section class="tooltip-validations" id="tooltip-validation">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h4 class="card-title">Nova uplata {{ payment_form.errors }}</h4>
+                                                        </div>
+                                                        <div class="card-content">
+                                                            <div class="card-body">
+                                                                <form method="POST" class="needs-validation" >{% csrf_token %}
+                                                                    <div class="form-row">
+                                                                        <div class="col-md-2 col-12 mb-3">
+                                                                            <center><label for="validationTooltip01">BROJ IZVODA</label></center>
+                                                                            <input name="bank_paper_id" type="number" class="form-control" required="required">
+                                                                        </div>
+                                                                        <div class="col-md-2 col-12 mb-3">
+                                                                            <center><label for="validationTooltip02">DATUM UPLATE</label></center>
+                                                                            <input name="payment_date" class="form-control" type="text">
+                                                                        </div>
+                                                                        <div class="col-md-2 col-12 mb-3">
+                                                                            <center><label for="validationTooltip03">UPLACENO</label></center>
+                                                                            <input name="paid" type="number" step="0.01" class="form-control" required>
+                                                                        </div>
+                                                                        <div class="col-md-2 col-12 mb-3">
+                                                                            <center><label for="validationTooltip03">TREBA DA UPLATI</label></center>
+                                                                            <input name="need_to_pay" type="number" step="0.01" class="form-control" >
+                                                                        </div>
+                                                                        <div class="col-md-2 col-12 mb-3">
+                                                                            <center><label for="validationTooltip03">NAPOMENA</label></center>
+                                                                            <input name="notes" class="form-control" type="text">
+                                                                        </div>
+                                                                    </div>
+                                                                    <button class="btn btn-primary round" type="submit">Dodaj uplatu</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section><br><br>
+                                    {% if payments %}
+                                    <div class="row">
+                                            <div class="col-lg-3 col-sm-6 col-12">
+                                                <div class="card">
+                                                    <div class="card-header d-flex align-items-start pb-0">
+                                                        <div>
+                                                            <center><h2 class="text-bold-700 mb-0">{{ amount|floatformat:2 }} €</h2></center>
+                                                            <p>Ukupno uplaćeno</p>
+                                                        </div>
+                                                        <div class=" bg-rgba-white p-50 m-0">
+                                                            <div class="avatar-content">
+                                                                <i class="fa fa-money-bill text-success font-large-1"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                              <div class="content-body">
+                                                <!-- Basic Tables start -->
+                                                <div class="row" id="basic-table">
+                                                    <div class="col-12">
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                <h4 class="card-title">Uplate</h4>
+                                                            </div>
+                                                            <div class="card-content">
+                                                                <div class="card-body">
+                                                                    <!-- Table with outer spacing -->
+                                                                    <div class="table-responsive">
+                                                                        <table class="table">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th><center>Izvod</center></th>
+                                                                                    <th><center>Datum uplate</center></th>
+                                                                                    <th><center>Uplaćeno</center></th>
+                                                                                    <th><center>Treba da uplati</center></th>
+                                                                                    <th><center>Napomena</center></th>
+                                                                                    <th><center>Promjena podataka</center></th>
+                                                                                    <th><center>Brisanje</center></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                            {% for payment in payments %}
+                                                                                <tr>
+                                                                                    <th><center>{{ payment.bank_paper_id }}</center></th>
+                                                                                    <td><center>{{ payment.payment_date }}</center></td>
+                                                                                    <td><center>{{ payment.paid }} €</center></td>
+                                                                                    <td><center>{{ payment.need_to_pay }} €</center></td>
+                                                                                    <td><center>{{ payment.notes.capitalize }}</center></td>
+                                                                                    <td><center><a href="{% url 'vrtic:update_payments' payment.id %}" class="btn btn-outline-success round" data-toggle="modal" data-target="#updateForm">Izmjeni</a></center></td>
+                                                                                     <div id="updateForm" class="modal fade text-center">
+                                                                                        <div class="modal-dialog">
+                                                                                          <div class="modal-content">
+                                                                                          </div>
+                                                                                        </div>
+                                                                                      </div>
+
+                                                                                    <td><center><a href="{% url 'vrtic:delete_payment' payment.id %}" class="btn bg-gradient-danger round" data-toggle="modal" data-target="#primary">Obrisi</a></center></td>
+                                                                                        <div class="modal fade text-left" id="primary" tabindex="-1">
+                                                                                            <div class="modal-dialog">
+                                                                                                <div class="modal-content">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                </tr>
+                                                                            {% endfor %}
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                              </div>
+
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+    </div>
+{% endblock %}

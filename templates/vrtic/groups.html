@@ -1,0 +1,47 @@
+{% extends 'vrtic/base.html' %}
+{% load static %}
+
+{% block title %}
+    Vrtici
+{% endblock %}
+
+{% block content %}
+ <div class="container">
+    <div class="row" id="table-head">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h1 class="card-title">{{ name }}</h1>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead class="info">
+                                            <tr>
+                                                <th scope="col"><center>Grupa</center></th>
+                                                <th scope="col"><center>Vaspitac</center></th>
+                                                <th scope="col"><center>Broj djece u grupi</center></th>
+                                                <th scope="col"><center>Pregled grupe</center></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for group in groups %}
+                                            <tr>
+                                                <td><center><strong>{{ group.name }}</strong></center></td>
+                                                <td><center>{{ group.teachers_set.all|first }}</center></td>
+                                                <td><center>{{ group.kids_set.count }}</center></td>
+                                                <td><center><a href="{% url 'vrtic:group' group.id %}" type="submit" class="btn btn-outline-info round mr-1 mb-1">Pregled</a>
+                                            </center></tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+{% endblock %}

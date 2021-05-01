@@ -1,0 +1,257 @@
+{% extends 'vrtic/base.html' %}
+
+{% block title %}
+ Upis djece
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+ <section id="basic-horizontal-layouts">
+                    <div class="row match-height">
+                        <div class=" col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Upis djece {{ form.errors }}</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <form class="form form-horizontal" action="{% url 'vrtic:create_kid' %}" method="POST">{% csrf_token %}
+                                            <div class="form-body">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="form-group row">
+                                                            <div class="col-md-4">
+                                                                <span>Ime i Prezime</span>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input type="text" id="first-name" class="form-control round" name="name" placeholder="Ime i Prezime" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group row">
+                                                            <div class="col-md-4">
+                                                                <span>Mjesto i datum rodjenja</span>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input type="text" id="email-id" class="form-control round" name="city_birthday" placeholder="Mjesto i datum rodjenja">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group row">
+                                                            <div class="col-md-4">
+                                                                <span>Jedinstveni maticni broj gradjana</span>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input type="text" id="contact-info" class="form-control round" name="custom_id" placeholder="JMBG">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group row">
+                                                            <div class="col-md-4">
+                                                                <span>Adresa stanovanja</span>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input type="text" id="password" class="form-control round" name="address" placeholder="Adresa">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group row">
+                                                            <div class="col-md-4">
+                                                                <span>Broj telefona</span>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input type="text" id="contact-info" class="form-control round" name="contact_phone" placeholder="Telefon">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group row">
+                                                            <div class="col-md-4">
+                                                                <span>Pol djeteta</span>
+                                                            </div>
+                                                        <div class="col-md-8">
+                                                            <fieldset class="form-group">
+                                                                <select name="gender" class="form-control round">
+                                                                    <option value="muski">Muski</option>
+                                                                    <option value="zenski">Zenski</option>
+                                                                </select>
+                                                            </fieldset>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group row">
+                                                            <div class="col-md-4">
+                                                                <span>Broj clanova porodice</span>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input type="number" id="contact-info" class="form-control round" name="family_size" placeholder="Broj clanova porodice">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                       <div class="form-group row">
+                                                            <div class="col-md-4">
+                                                                <span>Dijete zivi sa</span>
+                                                            </div>
+                                                        <div class="col-md-8">
+                                                            <fieldset class="form-group">
+                                                                <select name="living_with" class="form-control round">
+                                                                    <option value="oba roditelja">Oba roditelja</option>
+                                                                    <option value="jednim roditeljem">Jednim roditeljem</option>
+                                                                    <option value="bez roditelja">Bez roditelja</option>
+                                                                </select>
+                                                            </fieldset>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group row">
+                                                            <div class="col-md-4">
+                                                                <span>Broj djece predskolskog uzrasta u porodici</span>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input type="number" id="contact-info" class="form-control round" name="number_of_preschool_kids_in_family" placeholder="Broj djece predskolskog uzrasta u porodici">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group row">
+                                                            <div class="col-md-4">
+                                                                <span>Dijete je vec pohadjalo vaspitnu ustanovu</span>
+                                                            </div>
+                                                        <div class="col-md-8">
+                                                            <fieldset class="form-group">
+                                                                <select name="kid_already_been_in_kindergarten" class="form-control round">
+                                                                    <option value="da">Da</option>
+                                                                    <option value="ne">Ne</option>
+                                                                </select>
+                                                            </fieldset>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group row">
+                                                            <div class="col-md-4">
+                                                                <span>Odabir programa</span>
+                                                            </div>
+                                                        <div class="col-md-8">
+                                                            <fieldset class="form-group">
+                                                                <select name="program_choice" class="form-control round">
+                                                                    <option value="primarni program">Primarni program</option>
+                                                                    <option value="kraci program">Kraci program</option>
+                                                                </select>
+                                                            </fieldset>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group row">
+                                                            <div class="col-md-4">
+                                                                <span>Odabir grupe</span>
+                                                            </div>
+                                                        <div class="col-md-8">
+                                                            <fieldset class="form-group">
+                                                                <select name="group" class="form-control round">
+                                                                    {% for group in groups %}
+                                                                    <option value="{{ group.id }}">{{ group.name }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </fieldset>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <br><br><br>
+                                                    <div class="card-header">
+                                                        <h4 class="card-title">Podaci o roditeljima</h4>
+                                                    </div><br><br><br><br><br><br>
+                                                    <div class="col-12">
+                                                        <div class="form-group row">
+                                                            <div class="col-md-4">
+                                                                <span>Otac</span>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input type="text" id="first-name" class="form-control round" name="father_name" placeholder="Ime i Prezime">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group row">
+                                                            <div class="col-md-4">
+                                                                <span>Nivo obrazovanja - Zanimanje</span>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input type="text" id="email-id" class="form-control round" name="father_education_level" placeholder="Obrazovanje / Zanimanje">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group row">
+                                                            <div class="col-md-4">
+                                                                <span>Poslodavac ko koga je roditelj zaposlen</span>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input type="text" id="contact-info" class="form-control round" name="father_company" placeholder="Firma / Preduzece">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <br><br><br><br><br><br>
+                                                    <div class="col-12">
+                                                        <div class="form-group row">
+                                                            <div class="col-md-4">
+                                                                <span>Majka</span>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input type="text" id="first-name" class="form-control round" name="mother_name" placeholder="Ime i Prezime">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group row">
+                                                            <div class="col-md-4">
+                                                                <span>Nivo obrazovanja - Zanimanje</span>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input type="text" id="email-id" class="form-control round" name="mother_education_level" placeholder="Obrazovanje / Zanimanje">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group row">
+                                                            <div class="col-md-4">
+                                                                <span>Poslodavac ko koga je roditelj zaposlen</span>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input type="text" id="contact-info" class="form-control round" name="mother_company" placeholder="Firma / Preduzece">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <br><br><br><br><br><br>
+                                                    <div class="col-12">
+                                                        <div class="form-group row">
+                                                            <div class="col-md-4">
+                                                                <strong><span>Napomena roditelja</span></strong>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input type="text" id="first-name" class="form-control round" name="parent_notes" placeholder="Napomena">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-8 offset-md-4">
+                                                        <button type="submit" class="btn btn-outline-info round btn-block">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+    </div>
+{% endblock %}

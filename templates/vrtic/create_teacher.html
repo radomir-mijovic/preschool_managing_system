@@ -1,0 +1,70 @@
+{% extends 'vrtic/base.html' %}
+
+{% block title %}
+    Upis Vaspitaca
+{% endblock %}
+
+{% block content %}<br><br><br>
+        <div class="container">
+                <section id="input-style">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Upisati novog vaspitaca</h4>
+                                </div>
+                                <form method="POST" action="{% url 'vrtic:teacher_create' %}">{% csrf_token %}
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                            </div>
+                                                <div class="col-sm-6 col-12">
+                                                    <fieldset class="form-group">
+                                                        <input name="name" type="text" class="form-control round text-center" placeholder="Ime i Prezime" required>
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-sm-6 col-12">
+                                                    <fieldset class="form-group">
+                                                        <input name="address" type="text" class="form-control round text-center" placeholder="Adresa">
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-sm-6 col-12">
+                                                    <fieldset class="form-group">
+                                                        <input name="date_of_birth" type="text" class="form-control round text-center" placeholder="Datum rodjenja">
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-sm-6 col-12">
+                                                    <fieldset class="form-group">
+                                                        <input name="phone" type="text" class="form-control round text-center" placeholder="Broj telefona">
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-sm-6 col-12">
+                                                    <fieldset class="form-group">
+                                                        <input name="description" type="text" class="form-control round text-center" placeholder="Opis posla">
+                                                    </fieldset>
+                                                </div>
+
+                                                <div class="col-sm-6 col-12">
+                                                    <fieldset class="form-group">
+                                                    <select style="text-align-last:center;" name="group" class="form-control round">
+                                                        <option value="" disabled selected>Odabir Grupe</option>
+                                                        {% for group in groups %}
+                                                        <option value="{{ group.id }}"> {{ group.name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </fieldset>
+                                                </div>
+                                            <div class="col-md-8 offset-md-4">
+                                                  <button  type="submit" class="btn btn-outline-info round">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+        </div>
+{% endblock %}
