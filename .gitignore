@@ -1,3 +1,4 @@
+.env
 venv/
 pip-log.txt
 __pycache__
